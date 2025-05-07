@@ -1,0 +1,21 @@
+1. Cree un algoritmo para ver un video en Youtube. Sea lo más especifico posible.
+	1. Inicio
+	2. Si tiene computadora
+		a. Abra y encienda la computadora
+		b. Si la computadora tiene contraseña
+			i. Desbloquee la computadora
+		c. Abra el buscador de preferencia
+		d. En la barra de búsqueda ingrese “www.youtube.com”
+	3. Sino, si tiene smartphone o tablet
+		a. Si dispositivo tiene clave
+			i. Desbloquee el dispositivo
+		b. Busque la aplicación de youtube
+		c. Si la aplicación de youtube no esta instalada
+			i. Abra la tienda del sistema operativo de su dispositivo
+			ii. Instale la aplicación de youtube
+	4. Sino:
+		a. Busque a alguien que tenga algunos de los dispositivos anteriores y pídalo prestado
+	5. Ir a la lupa o buscador de youtube
+	6. Escriba “Videos de programación” y presione buscar
+	7. Una vez que youtube cargue los videos, dele click o estripe el primer video en la lista.
+	8. Fin
