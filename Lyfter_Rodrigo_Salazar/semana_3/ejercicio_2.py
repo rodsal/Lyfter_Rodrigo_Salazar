@@ -1,0 +1,5 @@
+print(3+5)
+print(90+430)
+print(560-30)
+print(6*9)
+print(60/2)

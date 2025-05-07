@@ -1,0 +1,79 @@
+1. Cree un algoritmo que describa su rutina diaria. Use condiciones, condiciones múltiples y ciclos.
+	1. Inicio
+	2. Suena la alarma
+	3. Mientras siga dormido
+    		1. Alarma sigue sonando
+	4. Una vez despierto reviso la hora 
+	5. Si es antes de las 7am
+    		1. Mientras no sean las 7 am
+        		1. Siga durmiendo
+    		2. Levántese
+	6. Sino:
+    		1. Levántese
+	7. Quitese la ropa
+	8. Abra el tubo del baño
+	9. Mientras el agua no este tibia
+    		1. Regule la temperatura del agua
+	10. Si no hay shampoo y jabon
+    		1. Rellene el faltante
+	11. Ingrese al baño 
+	12. Poner shampoo en el pelo
+	13. Poner jabon en la esponja
+	14. Enjabonarse el cuerpo
+	15. Quitarse el jabon y el shampoo
+	16. Salir de la ducha
+	17. Si no hay paño
+    		1. Ir al closet 
+    		2. Abrir el closet en la seccion de los baños
+    		3. sacar un paño
+	18. Secarse con el paño
+	19. Ir a la cocina
+	20. Sacar un plato
+	21. Si no hay nada para desayunar
+    		1. Si hay huevos
+        		1. Sacar el sárten
+        		2. Prender la cocina
+        		3. Poner el sarten sobre el disco encendido
+        		4. Vertir los huevos en el sarten
+        		5. Mientras el huevo no esté cocina
+            			1. Revolver en el sartén el huevo
+        		6. Poner el huevo cocinado en el plato
+    		2. Sino, hay queso
+        		1. Abrir la refrigeradora
+        		2. Sacar el queso
+        		3. Agarrar un cuchillo
+        		4. Partir dos tajadas de queso
+        		5. Poner las dos tajadas de queso en el plato
+    		3. Sino, hay jamón
+        		1. Abrir la refigeradora
+        		2. Sacar el jamon
+        		3. Agarrar dos tajadas de jamon
+        		4. Ponerlas sobre el plato
+    		4. Sino:
+        		1. No desayunar y apuntar huevos, jamon y queso en la lista de compras
+	22. Ir hacia la oficia de la casa.
+	23. Encender la computadora de trabajo
+	24. Abrir el calendario
+	25. Revisar las reuniones del día 
+	26. Por cada reunion
+    		1. Crear una nota para poner las minutas de la reunion
+    		2. Si hay que preparar algo para la reunion
+        		1. Preparar
+	27. Si ya son las 5pm
+    		1. Apagar la computadora de trabajo
+	28. Si hay algo para cenar
+    		1. Sacar comida del refrigerador
+    		2. Poner comida en un plato
+    		3. Ingresar comida en el microondas
+	29. Sino:
+    		1. Ingresar a la plataforma Uber Eats
+    		2. Buscar lo comida de mi agrado
+    		3. Agrega comida al carrito
+    		4. pagar comida
+    		5. Esperar a que llegue la comida
+    		6. Recibir comida del repartidor
+	30. Preparar la mesa 
+	31. Servir la comida 
+	32. Cenar
+	33. Ir a dormir
+	34. Fin

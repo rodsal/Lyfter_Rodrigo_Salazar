@@ -1,0 +1,25 @@
+1. Cree un algoritmo que le pida 2 números al usuario, los guarde en dos variables distintas (`primero` y `segundo`) y los ordene de menor a mayor en dichas variables.
+    1. Ejemplos:
+        1. A: 56, B: 32 → A: 32, B: 56
+        2. A: 24, B: 76 → A: 24, B: 76
+        3. A: 45, B: 12 → A: 12, B: 45
+
+
+	1. Inicio
+	2. Definir primero
+	3. Definir segundo
+	4. Definir numero_temporal
+	5. Mostrar “Ingrese el primer número”
+	6. Pedir primero
+	7. Mostrar “Ingrese el segundo número”
+	8. Pedir segundo
+	9. Și (primero > segundo) entonces:
+    		1. numero_temporal = primero
+    		2. primero = segundo
+    		3. Segundo = numero_temporal
+	10. FinSi
+	11. Mostrar “El primer número es”
+	12. Mostrar primero
+	13. Mostrar “El segundo número es”
+	14. Mostrar segundo
+	15. Fin
