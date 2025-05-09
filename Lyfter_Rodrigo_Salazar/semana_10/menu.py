@@ -31,39 +31,45 @@ def read_option():
             print("Las opciones a seleccionar son solo del 1 al 7. Favor intentar con solo esas posibilidades")
             pass
 
-def option_execution(option,path):
-    #try:
-    continue_running = True
-    if os.path.exists(path):
-        students = data.read_student_info(path)
-    else:
-        students = []
-    if(option == 1):
-        student_name, student_section, spanish_grade, english_grade, ss_grade, science_grade = actions.request_student_info()
-        add_student = data.add_to_json_format(student_name,student_section,spanish_grade, english_grade,ss_grade, science_grade)
-        students.append(add_student)
-        try:
-            data.write_json_to_file(students,path)
-        except Exception as exception:
-            print("Hubo un error conviertiendo el file en csv " + exception)
-    elif (option == 2):
-        actions.display_student_info(students)
-    elif (option == 3):
-        average_per_student = actions.calculate_students_average(students)
-        top_3 = actions.top_3_students(average_per_student)
-        actions.display_top_3(top_3)
-    elif (option == 4):
-        average_per_student = actions.calculate_students_average(students)
-        actions.display_students_averages(average_per_student)
-    elif (option == 5):
-        pass
-    elif (option == 6):
-        pass
-    else:
-        continue_running = False
-    return continue_running
-    #except Exception as exception:
-    #    print("Hubo un error de ejecución " + exception)
+def option_execution(option,path,students):
+    try:
+        continue_running = True
+    
+        if(option == 1):
+            student_name, student_section, spanish_grade, english_grade, ss_grade, science_grade = actions.request_student_info()
+            add_student = data.add_to_dictionary_format(student_name,student_section,spanish_grade, english_grade,ss_grade, science_grade)
+            students.append(add_student)
+
+        elif (option == 2):
+            actions.display_student_info(students)
+
+        elif (option == 3):
+            average_per_student = actions.calculate_students_average(students)
+            top_3 = actions.top_3_students(average_per_student)
+            actions.display_top_3(top_3)
+
+        elif (option == 4):
+            average_per_student = actions.calculate_students_average(students)
+            actions.display_students_averages(average_per_student)
+
+        elif (option == 5):
+            data.write_csv(path, students, students[0].keys())
+            print("El archivo fue exportado exitosamente. Con el nombre " + path)
+
+        elif (option == 6):
+            try:
+                import_path = data.request_import_file()
+                if os.path.exists(import_path):
+                    students = data.read_file(import_path)
+                else:
+                    raise FileExistsError
+            except FileExistsError as error:
+                print("El archivo solicitado no existe, favor intente con otro")
+        else:
+            continue_running = False
+        return continue_running, students
+    except Exception as exception:
+        print("Hubo un error de ejecución " + exception)
         
 
 

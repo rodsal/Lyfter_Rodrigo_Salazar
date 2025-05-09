@@ -1,12 +1,13 @@
 import menu
-path = "students_data.json"
+export_path = "students_data_export.csv"
 continue_running = True
+students = []
 while(continue_running):
-    #try:
-    menu.show_menu()
-    selected_option = menu.read_option()
-    continue_running = menu.option_execution(selected_option, path)
+    try:
+        menu.show_menu()
+        selected_option = menu.read_option()
+        continue_running, students = menu.option_execution(selected_option, export_path,students)
 
-    #except Exception as general_exception:
-    #    print("An excpetion occured: " + str(general_exception))
-    #    continue_running = False        
+    except Exception as general_exception:
+        print("Una excepcin ocurrió: " + str(general_exception))
+        continue_running = False        
