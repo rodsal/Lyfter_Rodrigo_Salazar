@@ -31,10 +31,10 @@ def read_option():
             print("Las opciones a seleccionar son solo del 1 al 7. Favor intentar con solo esas posibilidades")
             pass
 
-def option_execution(option,path,students):
-    try:
+def option_execution(option,students):
+    #try:
+        path = "students_data_export.csv"
         continue_running = True
-    
         if(option == 1):
             student_name, student_section, spanish_grade, english_grade, ss_grade, science_grade = actions.request_student_info()
             add_student = data.add_to_dictionary_format(student_name,student_section,spanish_grade, english_grade,ss_grade, science_grade)
@@ -50,7 +50,8 @@ def option_execution(option,path,students):
 
         elif (option == 4):
             average_per_student = actions.calculate_students_average(students)
-            actions.display_students_averages(average_per_student)
+            final_average = actions.average_students_grades(average_per_student)
+            actions.display_final_average(final_average)
 
         elif (option == 5):
             data.write_csv(path, students, students[0].keys())
@@ -68,8 +69,8 @@ def option_execution(option,path,students):
         else:
             continue_running = False
         return continue_running, students
-    except Exception as exception:
-        print("Hubo un error de ejecución " + exception)
+    #except Exception as exception:
+    #    print("Hubo un error de ejecución " + exception)
         
 
 

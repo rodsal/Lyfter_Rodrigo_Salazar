@@ -36,7 +36,7 @@ def calculate_students_average(students):
         sum_grades = 0
         for key in student:
             if "nota" in key:
-                sum_grades = sum_grades + student[key]
+                sum_grades = sum_grades + int(student[key])
         average = calculate_average(sum_grades)
         averages_per_student[student["nombre_completo"]] = average
     return averages_per_student
@@ -61,17 +61,23 @@ def display_top_3 (top_3):
         print("Nombre: " + name + " - Notas: " + str(grade))
         print("---------------------------------------")
 
-def display_students_averages (averages_per_student):
-    print("Estos son los estudiantes y sus proemdios")
+def average_students_grades (averages_per_student):
+    final_average = 0
     for name in averages_per_student:
-        print("Nombre: " + name + " - Nota: " + str(averages_per_student[name]))
-        print("---------------------------------------")
+        final_average = final_average + averages_per_student[name]
+    final_average = final_average/len(averages_per_student)
+    return final_average
+
+def display_final_average(final_average):
+    print ("El promedio final de todos los estudiantes es: " + str(final_average))
+    print("---------------------------------------------")
 
 def display_student_info(students):
     for student in students:
         for key in student:
             print(key + ": " + str(student[key]))
         print("---------------------------------------")
+
 
 
 

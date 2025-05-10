@@ -32,5 +32,7 @@ def request_import_file():
     import_file_path = input("Ingrese la ruta del archivo que desea importar: ")
     return import_file_path
 
-
+def initialize_values():
+   students = []
+   return True, students
 
