@@ -32,49 +32,49 @@ def read_option():
             pass
 
 def option_execution(option,students):
-    #try:
+    try:
         
-    path = "students_data_export.csv"
-    continue_running = True
-    if(option == 1):
-        new_student = actions.request_student_info()
-        students.add_student(new_student)
+        path = "students_data_export.csv"
+        continue_running = True
+        if(option == 1):
+            new_student = actions.request_student_info()
+            students.add_student(new_student)
 
-    elif (option == 2):
-        students.display_all_students()
+        elif (option == 2):
+            students.display_all_students()
 
-    elif (option == 3):
-        average_per_student = students.calculate_students_average()
-        top_3 = actions.top_3_students(average_per_student)
-        actions.display_top_3(top_3)
+        elif (option == 3):
+            average_per_student = students.calculate_students_average()
+            top_3 = actions.top_3_students(average_per_student)
+            actions.display_top_3(top_3)
 
-    elif (option == 4):
-        average_per_student = students.calculate_students_average()
-        final_average = actions.average_students_grades(average_per_student)
-        actions.display_final_average(final_average)
+        elif (option == 4):
+            average_per_student = students.calculate_students_average()
+            final_average = actions.average_students_grades(average_per_student)
+            actions.display_final_average(final_average)
 
-    elif (option == 5):
-        students_to_dic = students.convert_to_dictionary()
-        data.write_csv(path, students_to_dic, students_to_dic[0].keys())
-        print("El archivo fue exportado exitosamente. Con el nombre " + path)
+        elif (option == 5):
+            students_to_dic = students.convert_to_dictionary()
+            data.write_csv(path, students_to_dic, students_to_dic[0].keys())
+            print("El archivo fue exportado exitosamente. Con el nombre " + path)
 
-    elif (option == 6):
-        try:
-            import_path = data.request_import_file()
-            if os.path.exists(import_path):
-                dic_students = data.read_file(import_path)
-                students.convert_from_dictionary(dic_students)
-            else:
-                raise FileExistsError
-        except FileExistsError as error:
-            print("El archivo solicitado no existe, favor intente con otro")
+        elif (option == 6):
+            try:
+                import_path = data.request_import_file()
+                if os.path.exists(import_path):
+                    dic_students = data.read_file(import_path)
+                    students.convert_from_dictionary(dic_students)
+                else:
+                    raise FileExistsError
+            except FileExistsError as error:
+                print("El archivo solicitado no existe, favor intente con otro")
 
-    else:
-        continue_running = False
-    return continue_running
+        else:
+            continue_running = False
+        return continue_running
     
-    #except Exception as exception:
-    #    print("Hubo un error de ejecución " + exception)
+    except Exception as exception:
+        print("Hubo un error de ejecución " + exception)
         
 
 

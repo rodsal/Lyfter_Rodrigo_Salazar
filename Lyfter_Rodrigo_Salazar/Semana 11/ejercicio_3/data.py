@@ -23,6 +23,5 @@ def request_import_file():
     return import_file_path
 
 def initialize_values():
-   students = []
-   return True, students
+   return True
 
