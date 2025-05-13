@@ -4,9 +4,6 @@ class Person():
 		self.name = name
 		self.age = 0
 		
-
-
-
 class Bus():
 	def __init__(self):
 		self.max_passengers = 15
