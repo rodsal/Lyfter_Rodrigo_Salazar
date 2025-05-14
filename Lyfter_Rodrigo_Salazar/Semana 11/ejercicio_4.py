@@ -48,3 +48,8 @@ class Human:
         right_leg = Leg(right_foot)
 
         self.torso = Torso(head, left_arm, right_arm, left_leg, right_leg)
+
+human = Human()
+print(human.torso.head.eyes, human.torso.head.ears)
+print(human.torso.left_arm.hand.hand_fingers)
+print(human.torso.right_leg.feet.feet_fingers)
