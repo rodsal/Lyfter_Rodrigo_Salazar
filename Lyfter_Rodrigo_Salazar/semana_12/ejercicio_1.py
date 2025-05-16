@@ -16,27 +16,33 @@ from abc import ABC, abstractmethod
 class BankAccount(ABC):
     def __init__(self, balance):
          self.balance = balance
-
-    @abstractmethod
-    def _substract_money(self, amount):
+    
+    def add_money (self, amount):
+        self.balance += amount
+    
+    def substract_money(self, amount):
         self.balance -= amount
+    
+    @abstractmethod
+    def withdraw ():
+        pass
 
 class SavingAccount (BankAccount):
     def __init__(self, balance, min_balance):
         super().__init__(balance)
         self.min_balance = min_balance
     
-    def _substract_money(self, amount):
+    def withdraw (self, amount):
         if amount < self.balance:
             if (self.balance - amount) >= self.min_balance:
-                super()._substract_money(amount)
-                print ("Se retiró " + str(amount) + " de la cuenta con un balance de = " + str(self.balance))
+                self.substract_money(amount)
+                print ("You withdraw " + str(amount) + " form your savings account, now you have a balance of " + str(self.balance))
             else:
-                print("El balance no puede ser menor a " + str(self.min_balance) + " que es lo permitido en la cuenta")
+                raise ValueError ("The balance can´t be lower than " + str(self.min_balance) + " that is the minimun value permitted on the account")
         else:
-            print("El monto a retirar no puede ser mayor al monto que tiene en el balance")
+            raise ValueError ("The amount withdrawn can´t be greater to the amount in your account")
         
 
 
 savings_1 = SavingAccount(2000,300)
-savings_1._substract_money(1700)
+savings_1.withdraw(3000)
