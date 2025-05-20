@@ -6,9 +6,9 @@ y arroje una excepción de no ser así.
 def is_number(func):
     def wrapper(*args):       
         for arg in args:
-            if not isinstance(arg, int):
+            if not isinstance(arg, (int, float)):
                 raise TypeError ("There are parameters that are not numbers")
-        func(*args)
+        return func(*args)
     return wrapper
 
 @is_number
@@ -16,10 +16,11 @@ def number_counter(*args):
     counter = 0
     for arg in args:
         counter = counter + arg
-    print(counter)
+    return counter
 
 
-number_counter(1,4,6,7,8,9)
+calculate_number = number_counter(10,4,6,7,8, 4.5, 4.7)
+print(calculate_number)
 
 
 
