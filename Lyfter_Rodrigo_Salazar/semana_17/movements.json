@@ -33,5 +33,33 @@
         "category": "Salario",
         "type": "Income",
         "date": "2025-09-28 16:49:59"
+    },
+    {
+        "title": "Luz",
+        "amount": 36000.0,
+        "category": "Servicios",
+        "type": "Expense",
+        "date": "2025-09-28 17:14:59"
+    },
+    {
+        "title": "Telefono",
+        "amount": 25000.0,
+        "category": "Servicios",
+        "type": "Expense",
+        "date": "2025-09-28 17:15:18"
+    },
+    {
+        "title": "Ahorro",
+        "amount": 45000.0,
+        "category": "Salario",
+        "type": "Income",
+        "date": "2025-09-28 17:15:45"
+    },
+    {
+        "title": "income 1",
+        "amount": 34000.0,
+        "category": "Salario",
+        "type": "Income",
+        "date": "2025-09-28 17:27:05"
     }
 ]

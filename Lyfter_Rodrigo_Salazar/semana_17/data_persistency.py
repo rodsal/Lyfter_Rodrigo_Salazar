@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-class MovementManager:
+class Movements:
     def __init__(self, file_path="movements.json"):
         self.file_path = file_path
         self.movements = self.load_movements()
