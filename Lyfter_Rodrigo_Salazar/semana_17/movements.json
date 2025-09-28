@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Diario Mitad Octubre",
+        "amount": 64900.0,
+        "category": "Supermercado",
+        "type": "Expense",
+        "date": "2025-09-28 16:40:09"
+    },
+    {
+        "title": "Comida Domingo",
+        "amount": 15439.0,
+        "category": "Comida Afuera",
+        "type": "Expense",
+        "date": "2025-09-28 16:41:32"
+    },
+    {
+        "title": "Comida Sabado",
+        "amount": 5340.0,
+        "category": "Comida Afuera",
+        "type": "Expense",
+        "date": "2025-09-28 16:42:06"
+    },
+    {
+        "title": "Comida Viernes",
+        "amount": 32567.0,
+        "category": "Comida Afuera",
+        "type": "Expense",
+        "date": "2025-09-28 16:48:04"
+    },
+    {
+        "title": "Salario",
+        "amount": 737464738.0,
+        "category": "Salario",
+        "type": "Income",
+        "date": "2025-09-28 16:49:59"
+    }
+]
