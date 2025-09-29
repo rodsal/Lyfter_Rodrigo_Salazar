@@ -61,5 +61,12 @@
         "category": "Salario",
         "type": "Income",
         "date": "2025-09-28 17:27:05"
+    },
+    {
+        "title": "Inversiones",
+        "amount": 250000.0,
+        "category": "Inversiones",
+        "type": "Expense",
+        "date": "2025-09-29 10:27:43"
     }
 ]

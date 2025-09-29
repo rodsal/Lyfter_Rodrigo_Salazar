@@ -17,6 +17,7 @@ def category_window ():
             new_category = values["-NEWCATEGORY-"].strip()
             if categories.add_category(new_category):
                 sg.popup("New category added successfully.")
+                window["-NEWCATEGORY-"].update("")
             else:
                 sg.popup_error("Invalid or duplicate category.")
         elif event == "Show Categories":
