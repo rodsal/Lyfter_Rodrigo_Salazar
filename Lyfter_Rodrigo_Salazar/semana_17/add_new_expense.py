@@ -1,12 +1,12 @@
 import FreeSimpleGUI as sg
 from category_list import Categories
-from data_persistency import MovementManager
+from data_persistency import Movements
 
 class MovementWindow:
     def __init__(self, type):
         self.type = type
         self.categories = Categories()
-        self.movement_manager = MovementManager()
+        self.movements = Movements()
 
     def run(self):
         layout = [
@@ -33,13 +33,13 @@ class MovementWindow:
                 except ValueError:
                     sg.popup_error("Amount must be a number.")
                     continue
-                self.movement_manager.add_movement(title, amount, category, self.type)
+                self.movements.add_movement(title, amount, category, self.type)
                 sg.popup(f"{self.type} added successfully.")
                 window["-TITLE-"].update("")
                 window["-AMOUNT-"].update("")
                 window["-CATEGORY-"].update("---")
             elif event == "Show Table":
-                movements = self.movement_manager.movements
+                movements = self.movements.movements
                 if not movements:
                     sg.popup("No movements recorded.")
                 else:

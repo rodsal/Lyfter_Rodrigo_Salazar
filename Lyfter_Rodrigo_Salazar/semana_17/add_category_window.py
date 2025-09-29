@@ -1,7 +1,7 @@
 import FreeSimpleGUI as sg
 from category_list import Categories
 
-def category_window():
+def category_window ():
     categories = Categories()
     layout = [
         [sg.Text("Enter a new Category:"), sg.Input(key="-NEWCATEGORY-", size=(20, 1))],
