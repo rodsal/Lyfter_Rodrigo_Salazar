@@ -17,12 +17,12 @@ class Movements:
         with open(self.file_path, "w") as file:
             json.dump(self.movements, file, indent=4)
 
-    def add_movement(self, title, amount, category, tipo):
+    def add_movement(self, title, amount, category, type):
         movement = {
             "title": title,
             "amount": amount,
             "category": category,
-            "type": tipo,
+            "type": type,
             "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
         self.movements.append(movement)
