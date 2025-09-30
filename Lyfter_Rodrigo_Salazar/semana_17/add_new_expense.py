@@ -33,6 +33,9 @@ class MovementWindow:
                 except ValueError:
                     sg.popup_error("Amount must be a number.")
                     continue
+                if amount < 0:
+                    sg.popup_error("Amount cannot be a negative value.")
+                    continue
                 self.movements.add_movement(title, amount, category, self.type)
                 sg.popup(f"{self.type} added successfully.")
                 window["-TITLE-"].update("")

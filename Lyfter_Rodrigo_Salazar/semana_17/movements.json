@@ -138,5 +138,12 @@
         "category": "Entretenimiento",
         "type": "Expense",
         "date": "2025-09-29 22:55:20"
+    },
+    {
+        "title": "Compra de relleno",
+        "amount": 21567.0,
+        "category": "Supermercado",
+        "type": "Expense",
+        "date": "2025-09-30 16:15:02"
     }
 ]
