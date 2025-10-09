@@ -1,0 +1,11 @@
+[
+    {
+        "email": "action.bronson@gmail.com",
+        "password": "123@a!",
+        "token": "7f69c403-bc98-44e0-9b1b-fcb7260fdc47"
+    },
+    {
+        "email": "test.user@gmail.com",
+        "password": "secure123"
+    }
+]
