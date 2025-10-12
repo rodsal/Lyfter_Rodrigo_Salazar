@@ -122,12 +122,12 @@ def update_task(task_id):
         for key in mandatory_keys:
             print (request.json)
             print(key)
-            key_found = False
+            key_not_found = False
             if key in request.json:
                 task_found[key] = request.json[key]
             else:
                 key_found = True
-        if key_found:
+        if key_not_found:
             return jsonify(message="Json key not valid, please try with a valid key"),400
         
         write_json_to_file(task_list,json_path)
