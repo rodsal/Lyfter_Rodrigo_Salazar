@@ -65,6 +65,20 @@ def filtered_tasks():
         )
     return jsonify({"data": tasks_filtered})
 
+@app.route("/tasks/<task_id>")
+def show_task_by_id(task_id):
+    task_list = read_json_file(json_path)
+    try:
+        task_found = find_task(task_id, task_list)
+
+        if task_found == None:
+            return jsonify(message="Task not found"), 404 
+        
+        return jsonify({"data": task_found}), 200
+
+    except Exception as ex:
+        return jsonify(message=str(ex)), 500
+
 #Create
 
 @app.route("/tasks", methods=["POST"])
