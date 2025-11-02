@@ -49,10 +49,10 @@ def find_task (task_id, task_list):
 #CRUD
 #Read
 
-@app.route("/tasks/all")
+@app.route("/tasks")
 def show_tasks():
     task_list = read_json_file(json_path)
-    return {"data": task_list}
+    return jsonify({"data": task_list})
 
 @app.route("/tasks")
 def filtered_tasks():
@@ -63,11 +63,11 @@ def filtered_tasks():
         tasks_filtered = list(
             filter(lambda show: show["status"] == status_filter, tasks_filtered)
         )
-    return {"data": tasks_filtered}
+    return jsonify({"data": tasks_filtered})
 
 #Create
 
-@app.route("/addtask", methods=["POST"])
+@app.route("/tasks", methods=["POST"])
 def add_task():
     task_list = read_json_file(json_path)
     if not request.json:
@@ -106,7 +106,7 @@ def add_task():
 
 
 #Update
-@app.route("/task/<task_id>", methods = ["PUT"])
+@app.route("/tasks/<task_id>", methods = ["PUT"])
 def update_task(task_id):
     task_list = read_json_file(json_path)
     if not request.json:
@@ -139,7 +139,7 @@ def update_task(task_id):
         return jsonify(message=str(ex)), 500
 
 #Delete
-@app.route("/deletetask/<task_id>", methods = ["DELETE"])
+@app.route("/tasks/<task_id>", methods = ["DELETE"])
 def delete_task(task_id):
     task_list = read_json_file(json_path)
     try:

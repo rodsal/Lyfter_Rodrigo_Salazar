@@ -82,21 +82,21 @@ class Tasks(MethodView):
         json_users = Utils.read_json_file(users_path)
         validation_result = self.validate_token(json_users, token_provided)
         if validation_result:
-            return validation_result
+            return jsonify(validation_result)
         task_list = Utils.read_json_file(json_path)
         status_filter = request.args.get("status")
         if status_filter:
             tasks_filtered = list(filter(lambda show: show["status"] == status_filter, task_list))
-            return {"data": tasks_filtered}
+            return jsonify({"data": tasks_filtered})
         else:
-            return {"data": task_list}
+            return jsonify({"data": task_list})
 
     def post(self):
         token_provided = request.headers.get("token", "")
         json_users = Utils.read_json_file(users_path)
         validation_result = self.validate_token(json_users, token_provided)
         if validation_result:
-            return validation_result
+            return jsonify(validation_result)
         task_list = Utils.read_json_file(json_path)
         if not request.json:
             return jsonify(message="No empty body allowed"), 400
@@ -128,7 +128,7 @@ class Tasks(MethodView):
         json_users = Utils.read_json_file(users_path)
         validation_result = self.validate_token(json_users, token_provided)
         if validation_result:
-            return validation_result
+            return jsonify(validation_result)
         task_list = Utils.read_json_file(json_path)
         if not request.json:
             return jsonify(message="No empty body allowed"), 400
@@ -161,7 +161,7 @@ class Tasks(MethodView):
         json_users = Utils.read_json_file(users_path)
         validation_result = self.validate_token(json_users, token_provided)
         if validation_result:
-            return validation_result
+            return jsonify(validation_result)
         task_list = Utils.read_json_file(json_path)
         try:
             task_found = None
