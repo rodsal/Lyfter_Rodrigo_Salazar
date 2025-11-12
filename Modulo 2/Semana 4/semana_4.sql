@@ -1,33 +1,33 @@
 -- SQLite
 
---CREATE TABLE books (
---    id INTEGER PRIMARY KEY AUTOINCREMENT,
---    name VARCHAR NOT NULL,
---    author INT 
---);
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR NOT NULL,
+    author INT 
+);
 
---CREATE TABLE authors (
---    id INTEGER PRIMARY KEY AUTOINCREMENT,
---    name VARCHAR NOT NULL
---);
+CREATE TABLE authors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR NOT NULL
+);
 
---CREATE TABLE customer (
---    id INTEGER PRIMARY KEY AUTOINCREMENT,
---    name VARCHAR NOT NULL,
---    email VARCHAR NOT NULL 
---);
+CREATE TABLE customer (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL 
+);
 
---CREATE TABLE states (
---    id INTEGER PRIMARY KEY AUTOINCREMENT,
---    state VARCHAR NOT NULL
---);
+CREATE TABLE states (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    state VARCHAR NOT NULL
+);
 
---CREATE TABLE rents (
---    id INTEGER PRIMARY KEY AUTOINCREMENT,
---    book_id INT NOT NULL,
---    customer_id INT NOT NULL,
---    state_id INT NOT NULL
---);
+CREATE TABLE rents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_id INT NOT NULL,
+    customer_id INT NOT NULL,
+    state_id INT NOT NULL
+);
 
 --INSERT INTO books (name, author)
 --    VALUES ('Don Quijote', 1);
