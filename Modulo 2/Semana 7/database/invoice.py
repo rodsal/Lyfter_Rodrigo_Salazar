@@ -6,10 +6,10 @@ class Invoice():
         self.invoice_table = invoice_table
         self.engine = engine
 
-    def insert(self, user_id, cantidad_comprada, product_id, fecha_compra, total):
+    def insert(self, user_id, quantity_purchased, product_id, purchase_date, total):
         add_invoice = insert(self.invoice_table).values(
-            user_id=user_id, cantidad_comprada=cantidad_comprada, product_id=product_id,
-            fecha_compra=fecha_compra, total=total
+            user_id=user_id, quantity_purchased=quantity_purchased, product_id=product_id,
+            purchase_date=purchase_date, total=total
         )
         with self.engine.connect() as conn:
             result = conn.execute(add_invoice)

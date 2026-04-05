@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import Flask, request, Response, jsonify
 from database.db import DB_Manager
 from jwt_manager import JWT_Manager
+import bcrypt
 
 app = Flask("user-service")
 db_manager = DB_Manager()
@@ -56,14 +57,16 @@ def login():
     if data.get('username') is None or data.get('password') is None:
         return Response(status=400)
     else:
-        result = db_manager.get_user(data.get('username'), data.get('password'))
+        result = db_manager.get_user(data.get('username'))
         if result is None:
             return Response(status=403)
-        else:
-            user_id = result[0]
-            role = result[3]
-            token = jwt_manager.encode({'id': user_id, 'role': role})
-            return jsonify(token=token), 200
+        stored_hash = result[2]
+        if not bcrypt.checkpw(data.get('password').encode(), stored_hash.encode()):
+            return Response(status=403)
+        user_id = result[0]
+        role = result[3]
+        token = jwt_manager.encode({'id': user_id, 'role': role})
+        return jsonify(token=token), 200
 
 @app.route('/me')
 @token_required(allowed_roles=['admin', 'user'])
@@ -76,7 +79,11 @@ def create_product(current_user):
     data = request.get_json()
     if not all(k in data for k in ('name', 'price', 'quantity', 'enter_date')):
         return Response(status=400)
-    db_manager.products.insert(data['name'], data['price'], data['quantity'], data['enter_date'])
+    try:
+        enter_date = datetime.strptime(data['enter_date'], "%Y-%m-%d")
+    except ValueError:
+        return jsonify(message="Invalid date format, use YYYY-MM-DD"), 400
+    db_manager.products.insert(data['name'], data['price'], data['quantity'], enter_date)
     return jsonify(message="Product created"), 201
 
 @app.route('/products', methods=['GET'])
@@ -101,7 +108,14 @@ def update_product(current_user, p_id):
     p = db_manager.products.get_by_id(p_id)
     if not p:
         return Response(status=404)
-    db_manager.products.update('id', p_id, data)
+    allowed_fields = {'name', 'price', 'quantity', 'enter_date'}
+    safe_data = {k: v for k, v in data.items() if k in allowed_fields}
+    if 'enter_date' in safe_data:
+        try:
+            safe_data['enter_date'] = datetime.strptime(safe_data['enter_date'], "%Y-%m-%d")
+        except ValueError:
+            return jsonify(message="Invalid date format, use YYYY-MM-DD"), 400
+    db_manager.products.update('id', p_id, safe_data)
     return jsonify(message="Product updated"), 200
 
 @app.route('/products/<int:p_id>', methods=['DELETE'])
@@ -118,31 +132,33 @@ def delete_product(current_user, p_id):
 def buy_product(current_user):
     data = request.get_json()
     product_id = data.get('product_id')
-    cantidad = data.get('quantity')
-    
-    if not product_id or not cantidad or cantidad <= 0:
+    quantity = data.get('quantity')
+
+    if not product_id or not quantity or quantity <= 0:
         return Response(status=400)
-    
+
     p = db_manager.products.get_by_id(product_id)
     if not p:
         return Response(status=404)
-        
+
     current_quantity = p[4]
     price = p[2]
-    
-    if current_quantity < cantidad:
+
+    if current_quantity < quantity:
         return jsonify(message="Not enough inventory"), 400
-        
-    total_price = price * cantidad
-    new_quantity = current_quantity - cantidad
-    
-    # Update product inventory
-    db_manager.products.update('id', product_id, {'quantity': new_quantity})
-    
-    # Create invoice
-    fecha_compra = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    db_manager.invoices.insert(current_user[0], cantidad, product_id, fecha_compra, total_price)
-    
+
+    total_price = price * quantity
+    new_quantity = current_quantity - quantity
+
+    db_manager.purchase(
+        user_id=current_user[0],
+        product_id=product_id,
+        new_quantity=new_quantity,
+        quantity_purchased=quantity,
+        purchase_date=datetime.now(),
+        total=total_price,
+    )
+
     return jsonify(message="Purchase successful", total=total_price), 201
 
 @app.route('/invoices', methods=['GET'])
@@ -150,5 +166,5 @@ def buy_product(current_user):
 def get_invoices(current_user):
     user_id = current_user[0]
     user_invoices = db_manager.invoices.get_by_user_id(user_id)
-    result = [{'id': i[0], 'user_id': i[1], 'product_id': i[2], 'cantidad_comprada': i[3], 'fecha_compra': i[4], 'total': i[5]} for i in user_invoices]
+    result = [{'id': i[0], 'user_id': i[1], 'product_id': i[2], 'quantity_purchased': i[3], 'purchase_date': str(i[4]), 'total': i[5]} for i in user_invoices]
     return jsonify(result), 200

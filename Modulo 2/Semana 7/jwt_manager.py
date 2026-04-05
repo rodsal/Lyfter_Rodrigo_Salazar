@@ -1,4 +1,5 @@
 import jwt
+from datetime import datetime, timedelta, timezone
 
 
 class JWT_Manager:
@@ -11,7 +12,8 @@ class JWT_Manager:
 
     def encode(self, data):
         try:
-            encoded = jwt.encode(data, self.private_key, algorithm=self.algorithm)
+            payload = {**data, 'exp': datetime.now(timezone.utc) + timedelta(hours=1)}
+            encoded = jwt.encode(payload, self.private_key, algorithm=self.algorithm)
             return encoded
         except Exception as e:
             print(e)

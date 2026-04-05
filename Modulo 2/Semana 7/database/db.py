@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy import MetaData
-from sqlalchemy import Table, Column, Integer, String, Float
-from sqlalchemy import insert, select
+from sqlalchemy import Table, Column, Integer, String, Float, DateTime
+from sqlalchemy import insert, select, update
 import os
+import bcrypt
 from dotenv import load_dotenv
 
 metadata_obj = MetaData()
@@ -22,7 +23,7 @@ product_table = Table(
     Column("id", Integer, primary_key=True),
     Column("name", String(100)),
     Column("price", Float),
-    Column("enter_date", String(50)),
+    Column("enter_date", DateTime),
     Column("quantity", Integer),
 )
 
@@ -32,8 +33,8 @@ invoice_table = Table(
     Column("id", Integer, primary_key=True),
     Column("user_id", Integer),
     Column("product_id", Integer),
-    Column("cantidad_comprada", Integer),
-    Column("fecha_compra", String(50)),
+    Column("quantity_purchased", Integer),
+    Column("purchase_date", DateTime),
     Column("total", Float),
 )
 
@@ -50,29 +51,44 @@ class DB_Manager:
         self.invoices = Invoice(invoice_table, self.engine)
         
     def insert_user(self, username, password, role="user"):
-        stmt = insert(user_table).returning(user_table.c.id, user_table.c.role).values(username=username, password=password, role=role)
+        hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        stmt = insert(user_table).returning(user_table.c.id, user_table.c.role).values(username=username, password=hashed.decode(), role=role)
         with self.engine.connect() as conn:
             result = conn.execute(stmt)
             conn.commit()
         return result.all()[0]
 
-    def get_user(self, username, password):
-        stmt = select(user_table).where(user_table.c.username == username).where(user_table.c.password == password)
+    def get_user(self, username):
+        stmt = select(user_table).where(user_table.c.username == username)
         with self.engine.connect() as conn:
             result = conn.execute(stmt)
             users = result.all()
-
-            if(len(users)==0):
+            if len(users) == 0:
                 return None
-            else:
-                return users[0]
+            return users[0]
 
     def get_user_by_id(self, id):
         stmt = select(user_table).where(user_table.c.id == id)
         with self.engine.connect() as conn:
             result = conn.execute(stmt)
             users = result.all()
-            if(len(users)==0):
+            if len(users) == 0:
                 return None
-            else:
-                return users[0]
+            return users[0]
+
+    def purchase(self, user_id, product_id, new_quantity, quantity_purchased, purchase_date, total):
+        update_stock = (
+            update(product_table)
+            .where(product_table.c.id == product_id)
+            .values(quantity=new_quantity)
+        )
+        insert_invoice = insert(invoice_table).values(
+            user_id=user_id,
+            product_id=product_id,
+            quantity_purchased=quantity_purchased,
+            purchase_date=purchase_date,
+            total=total,
+        )
+        with self.engine.begin() as conn:
+            conn.execute(update_stock)
+            conn.execute(insert_invoice)
